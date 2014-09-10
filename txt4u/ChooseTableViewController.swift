@@ -16,9 +16,13 @@ class ChooseTableViewController: FriendsTableViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        var friendQuery = PFUser.query()
+        friendQuery.findObjectsInBackgroundWithBlock { (users:[AnyObject]!, error:NSError!) -> Void in
+            self.friends = users as [PFUser]
+            self.tableView.reloadData()
+        }
     }
     
     @IBAction func cancelChoice(sender: AnyObject) {
@@ -26,6 +30,40 @@ class ChooseTableViewController: FriendsTableViewController {
     
         
     }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        /////////////////OLD WAY///////////////////////////
+        //////////////////////////////////////
+        //        var myOldFriends = ((self.navigationController?.presentingViewController as UINavigationController).viewControllers[0] as FriendsTableViewController).friends
+        //
+        //
+        //        var presentingNavC = self.navigationController?.presentingViewController as UINavigationController
+        //
+        //        var friendsTVC = presentingNavC.viewControllers[0] as FriendsTableViewController
+        //
+        //        var myFriends = friendsTVC.friends
+        //
+        //        myFriends += [friends[indexPath.row]]
+        
+        /////////////////NEW WAY///////////////////////////
+        //////////////////////////////////////
+        
+        var myFriends = ((self.navigationController?.presentingViewController as UINavigationController).viewControllers[0] as FriendsTableViewController).friends
+        
+        ((self.navigationController?.presentingViewController as UINavigationController).viewControllers[0] as FriendsTableViewController).friends += [friends[indexPath.row]]
+        
+        myFriends += ((self.navigationController?.presentingViewController as UINavigationController).viewControllers[0] as FriendsTableViewController).friends
+        
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        
+               
+//        var presentingNavC = self.navigationController?.presentingViewController as UINavigationController
+//        var friendsTVC = presentingNavC.viewControllers[0] as FriendsTableViewController
+//        var myFriends = friendsTVC.friends
+//        myFriends += [friends[indexPath.row]]
+//        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+    }
+
 
     /*
     // MARK: - Navigation

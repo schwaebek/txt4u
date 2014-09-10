@@ -35,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		271AFC3D19C0ABBC00267160 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		2749A2A119C0918C00A7F828 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		2749A2A219C0918C00A7F828 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		2749A2A319C0918C00A7F828 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
@@ -130,6 +131,7 @@
 				27F30E3519C08B6300A2EF8A /* FriendsTableViewController.swift */,
 				27F30E1A19C0867600A2EF8A /* MessageViewController.swift */,
 				27F30E1819C0867600A2EF8A /* AppDelegate.swift */,
+				271AFC3D19C0ABBC00267160 /* MyPlayground.playground */,
 				27F30E1C19C0867600A2EF8A /* Main.storyboard */,
 				27F30E1F19C0867600A2EF8A /* Images.xcassets */,
 				27F30E1619C0867600A2EF8A /* Supporting Files */,

@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Parse.setApplicationId("JMX6DWA2QE2paYv5b0r1FhjWNEexvONfLvE8h13o", clientKey: "HRFRvpzxnbCGJNDeGXSWSChJP0sAyU3Q03GuYP2V")
         PFUser.enableAutomaticUser()
+        
         var installation = PFInstallation.currentInstallation()
         installation["user"] = PFUser.currentUser()
         installation.saveInBackground()
