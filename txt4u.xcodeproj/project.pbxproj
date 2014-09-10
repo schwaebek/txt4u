@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		27F30E1919C0867600A2EF8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F30E1819C0867600A2EF8A /* AppDelegate.swift */; };
-		27F30E1B19C0867600A2EF8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F30E1A19C0867600A2EF8A /* ViewController.swift */; };
+		27F30E1B19C0867600A2EF8A /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F30E1A19C0867600A2EF8A /* MessageViewController.swift */; };
 		27F30E1E19C0867600A2EF8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27F30E1C19C0867600A2EF8A /* Main.storyboard */; };
 		27F30E2019C0867600A2EF8A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27F30E1F19C0867600A2EF8A /* Images.xcassets */; };
 		27F30E2C19C0867700A2EF8A /* txt4uTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F30E2B19C0867700A2EF8A /* txt4uTests.swift */; };
+		27F30E3619C08B6300A2EF8A /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F30E3519C08B6300A2EF8A /* FriendsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,12 +29,13 @@
 		27F30E1319C0867600A2EF8A /* txt4u.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = txt4u.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F30E1719C0867600A2EF8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27F30E1819C0867600A2EF8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		27F30E1A19C0867600A2EF8A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		27F30E1A19C0867600A2EF8A /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		27F30E1D19C0867600A2EF8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27F30E1F19C0867600A2EF8A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		27F30E2519C0867700A2EF8A /* txt4uTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = txt4uTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27F30E2A19C0867700A2EF8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27F30E2B19C0867700A2EF8A /* txt4uTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = txt4uTests.swift; sourceTree = "<group>"; };
+		27F30E3519C08B6300A2EF8A /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				27F30E1819C0867600A2EF8A /* AppDelegate.swift */,
-				27F30E1A19C0867600A2EF8A /* ViewController.swift */,
+				27F30E1A19C0867600A2EF8A /* MessageViewController.swift */,
+				27F30E3519C08B6300A2EF8A /* FriendsTableViewController.swift */,
 				27F30E1C19C0867600A2EF8A /* Main.storyboard */,
 				27F30E1F19C0867600A2EF8A /* Images.xcassets */,
 				27F30E1619C0867600A2EF8A /* Supporting Files */,
@@ -208,8 +211,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27F30E1B19C0867600A2EF8A /* ViewController.swift in Sources */,
+				27F30E1B19C0867600A2EF8A /* MessageViewController.swift in Sources */,
 				27F30E1919C0867600A2EF8A /* AppDelegate.swift in Sources */,
+				27F30E3619C08B6300A2EF8A /* FriendsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
