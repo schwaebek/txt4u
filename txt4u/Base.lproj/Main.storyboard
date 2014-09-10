@@ -7,7 +7,7 @@
         <!--Friends-->
         <scene sceneID="Tcd-za-0yp">
             <objects>
-                <tableViewController id="Ga5-l0-O8i" sceneMemberID="viewController">
+                <tableViewController id="Ga5-l0-O8i" customClass="FriendsTableViewController" customModule="txt4u" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OOa-A6-8yU">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -42,12 +42,12 @@
         <!--Choose a Friend-->
         <scene sceneID="XBP-IN-tkZ">
             <objects>
-                <tableViewController id="cwK-Gg-BUN" sceneMemberID="viewController">
+                <tableViewController id="cwK-Gg-BUN" customClass="ChooseTableViewController" customModule="txt4u" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bhd-Pq-z79">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Cnl-fK-6Sk">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendCell" id="Cnl-fK-6Sk">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Cnl-fK-6Sk" id="EQ6-h5-mSV">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -60,7 +60,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Choose a Friend" id="6Vr-kl-A2W">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="o6o-ha-5cY"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="o6o-ha-5cY">
+                            <connections>
+                                <action selector="cancelChoice:" destination="cwK-Gg-BUN" id="Efx-mZ-QrD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uCs-Ws-gGN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -83,10 +87,10 @@
             </objects>
             <point key="canvasLocation" x="-1204.5" y="415"/>
         </scene>
-        <!--View Controller-->
+        <!--Message View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="MessageViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="MessageViewController" customModule="txt4u" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -171,6 +175,11 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="formHolder" destination="YsZ-oU-Vqa" id="n0R-xg-Pcn"/>
+                        <outlet property="messageField" destination="X7c-Ay-s2T" id="98i-I7-tlb"/>
+                        <outlet property="sendButton" destination="prh-FN-Cox" id="90B-Mh-jhY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
