@@ -12,14 +12,33 @@ class FriendsTableViewController: UITableViewController {
     
     var friends: [PFUser] = []
 
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
+        //println(NSStringFromClass(self.classForCoder))
+        //reflect(self).summary
+       
+        //if NSStringFromClass(self.classForCoder) == "text4u.FriendsTableViewController" {
+        if reflect(self).summary == "text4u.FriendsTableViewController" {
+            if PFUser.currentUser()["friends"] != nil {
+                var queryMe = PFUser.query()
+                queryMe.whereKey("username", equalTo: PFUser.currentUser().username)
+                queryMe.includeKey("friends")
+                
+                queryMe.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
+                    println(objects)
+                    
+                    self.friends = objects[0]["friends"] as [PFUser]
+                    self.tableView.reloadData()
+            }
+            
+        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        }
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

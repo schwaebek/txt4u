@@ -25,9 +25,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         installation["user"] = PFUser.currentUser()
         installation.saveInBackground()
         
+        var types = UIUserNotificationType.Sound | UIUserNotificationType.Badge | UIUserNotificationType.Alert
+        var notificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
+        //UIApplication.sharedApplication().applicationIconBadgeNumber = 2
         // Override point for customization after application launch.
         return true
     }
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData)
+    {
+        var currentInstallation = PFInstallation.currentInstallation()
+        currentInstallation.setDeviceTokenFromData(deviceToken)
+        currentInstallation.saveInBackground()
+    }
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        println(userInfo)
+    }
+   
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

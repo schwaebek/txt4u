@@ -49,12 +49,13 @@ class MessageViewController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        println("inside will appear\(friend)")
+        //println("inside will appear\(friend)")
         //conversation = defaults.arrayForKey(friend.username) as [PFObject]!
         
         var messageQuery = PFQuery(className: "Message")
-        messageQuery.whereKey("sender", equalTo: PFUser.currentUser())
-        messageQuery.whereKey("reciever", equalTo: friend)
+        var possibleRelations = [PFUser.currentUser().username + friend.username, friend.username + PFUser.currentUser().username]
+        messageQuery.whereKey("relation", containedIn: possibleRelations)
+        
         
         messageQuery.findObjectsInBackgroundWithBlock { (messages: [AnyObject]!, error: NSError!) -> Void in
             if messages.count > 0 {
@@ -88,12 +89,23 @@ class MessageViewController: UIViewController, UITableViewDataSource, UITableVie
         message["receiver"] = friend
         message["content"] = messageField.text
         message["relation"] = PFUser.currentUser().username + friend.username
+        message["read"] = false
         
         
         conversation.append(message)
         message.saveInBackground()
         tableView.reloadData()
         
+        var deviceQuery = PFInstallation.query()
+        deviceQuery.whereKey("user", equalTo: friend)
+        
+        var push = PFPush()
+        push.setMessage(messageField.text)
+        push.setQuery(deviceQuery)
+        push.setData(NSDictionary(object: friend, forKey: "sender"))
+        push.sendPushInBackground()
+        
+       
          messageField.text = ""
         
     }
