@@ -41,6 +41,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         println(userInfo)
+        
+        var notification = userInfo["aps"] as NSDictionary
+        println(notification)
+        var alert = notification["alert"] as String
+        println(alert)
+        var sender = notification["sender"] as NSDictionary
+        println(sender)
+        var senderName = sender["objectId"] as String
+        println(senderName)
+        
+        // badge goes up here
+        // when messageVC shows unread messages change badge count
+        
+        UIApplication.sharedApplication().applicationIconBadgeNumber++
+        if UIApplication.sharedApplication().applicationState == UIApplicationState.Background {
+            var localNotification = UILocalNotification()
+            localNotification.alertBody = "\(senderName) : " + alert
+            localNotification.alertAction = "Reply"
+            
+            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+            
+        }else{
+            var nc = NSNotificationCenter.defaultCenter()
+            nc.postNotificationName("newMessage", object: nil, userInfo:userInfo)
+        }
+        
+        
     }
    
 

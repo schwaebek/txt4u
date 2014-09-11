@@ -6,6 +6,12 @@
 //  Copyright (c) 2014 Katlyn Schwaebe. All rights reserved.
 //
 
+// remove lines in tableview
+// make two different bubble colors for messages per user
+// have tableview automatically start scrolled to bottom 
+// show timestamp below message 
+//
+
 import UIKit
 
 class MessageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
@@ -31,8 +37,12 @@ class MessageViewController: UIViewController, UITableViewDataSource, UITableVie
         
         tableView.dataSource = self
         tableView.delegate = self
-        
         messageField.delegate = self
+        
+        var nc = NSNotificationCenter.defaultCenter()
+        nc.addObserverForName("newMessage", object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { (notification:NSNotification!) -> Void in
+            // make friend have a different color if with unread message
+        })
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,10 +109,12 @@ class MessageViewController: UIViewController, UITableViewDataSource, UITableVie
         var deviceQuery = PFInstallation.query()
         deviceQuery.whereKey("user", equalTo: friend)
         
+        var data = NSDictionary(objects: [messageField.text,friend], forKeys: ["alert","sender"])
+        
         var push = PFPush()
-        push.setMessage(messageField.text)
+        //push.setMessage(messageField.text)
         push.setQuery(deviceQuery)
-        push.setData(NSDictionary(object: friend, forKey: "sender"))
+        push.setData(data)
         push.sendPushInBackground()
         
        

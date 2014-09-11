@@ -16,7 +16,10 @@ class FriendsTableViewController: UITableViewController {
         super.viewDidLoad()
         //println(NSStringFromClass(self.classForCoder))
         //reflect(self).summary
-       
+        // self.tableView.tableFooterView = [[[UIView alloc] init] autorelease];
+        //self.tableView.separatorStyle =  UITableViewCellSeparatorStyle.None (get rid of lines)
+        
+        
         //if NSStringFromClass(self.classForCoder) == "text4u.FriendsTableViewController" {
         if reflect(self).summary == "text4u.FriendsTableViewController" {
             if PFUser.currentUser()["friends"] != nil {
@@ -32,6 +35,11 @@ class FriendsTableViewController: UITableViewController {
             }
             
         }
+        var nc = NSNotificationCenter.defaultCenter()
+            nc.addObserverForName("newMessage", object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: { (notification:NSNotification!) -> Void in
+            // make friend have a different color if with unread message
+            //update conversation and reload tableview (tabledata)
+        })
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
