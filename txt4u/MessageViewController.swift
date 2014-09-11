@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageViewController: UIViewController {
+class MessageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var formHolder: UIView!
                             
     @IBOutlet weak var messageField: UITextField!
@@ -24,41 +24,82 @@ class MessageViewController: UIViewController {
             println("inside will set\(user)")
         }
     }
-    var conversation: [PFObject]!
+    var conversation: [PFObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        messageField.delegate = self
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return conversation.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("messageCell", forIndexPath:indexPath) as UITableViewCell
+        cell.textLabel?.text = conversation[indexPath.row]["content"] as? String
+        return cell
     }
     
     var defaults = NSUserDefaults.standardUserDefaults()
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         println("inside will appear\(friend)")
-        conversation = defaults.arrayForKey(friend.username) as [PFObject]!
+        //conversation = defaults.arrayForKey(friend.username) as [PFObject]!
         
         var messageQuery = PFQuery(className: "Message")
-
         messageQuery.whereKey("sender", equalTo: PFUser.currentUser())
-
+        messageQuery.whereKey("reciever", equalTo: friend)
+        
         messageQuery.findObjectsInBackgroundWithBlock { (messages: [AnyObject]!, error: NSError!) -> Void in
-            
-            self.conversation = messages as [PFObject]
+            if messages.count > 0 {
+                self.conversation = messages as [PFObject]
+                self.tableView.reloadData()
+            }
             
         }
     }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
 
-    @IBAction func sendMessage(sender: AnyObject){
+        formHolder.frame.origin.y = UIScreen.mainScreen().bounds.size.height - 281
+        println(textField.frame.origin.y)
+        
+        
+    }
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        self.sendMessage(textField)
+        return true
+    }
+
+    @IBAction func sendMessage(sender: AnyObject) {
+        
+        messageField.resignFirstResponder()
+       
+        
         var message = PFObject(className: "Message")
-        message["sender"] = PFUser.currentUser().username
-        message["receiver"] = friend.username
+        message["sender"] = PFUser.currentUser()
+        message["receiver"] = friend
         message["content"] = messageField.text
+        message["relation"] = PFUser.currentUser().username + friend.username
+        
         
         conversation.append(message)
         message.saveInBackground()
+        tableView.reloadData()
+        
+         messageField.text = ""
         
     }
+    
 
 
 }
+
 
